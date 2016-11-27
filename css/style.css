@@ -1,3 +1,8 @@
+body {
+    font-family: 'Bangla', Arial, sans-serif !important;
+    font-size: 18px;
+}
+
 .option {
     width: 100px;
     font-size: 150%;
@@ -19,4 +24,50 @@
 
 .options {
     padding-left: 100px;
+}
+
+.btn-love {
+    background-color: #F06292;
+}
+
+.btn-love:hover {
+    background-color: #D81B60;
+}
+
+.btn-hate {
+    background-color: #90A4AE;
+    color: #000000;
+}
+
+.btn-hate:hover {
+    background-color: #455A64;
+}
+
+.btn-surprise {
+    background-color: #689F38;
+    color: #FFFFFF;
+}
+
+.btn-surprise:hover {
+    color: #FFFFFF;
+    background-color: #33691E;
+}
+
+.btn-happy {
+    background-color: #42A5F5;
+}
+
+.btn-happy:hover {
+    background-color: #0D47A1;
+    color: #FFFFFF;
+}
+
+.btn-confusion {
+    background-color: #80CBC4;
+    color: #000000;
+}
+
+.btn-confusion:hover {
+    background-color: #004D40;
+    color: #FFFFFF;
 }
