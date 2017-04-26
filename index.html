@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+    crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="margin-bottom: 20px;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="container">
+      <a class="navbar-brand" href="#">Tag It</a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">How To</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h4 id="tag_sentence" class="text-center">সেন্টেন্স ট্যাগার</h1>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row offset-md-5  text-center" style="margin-bottom: 50px;">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" id="prev_btn" class="btn btn-secondary">Previous</button>
+        <button type="button" id="next_btn" class="btn btn-secondary">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-center col-md-4">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_positive" autocomplete="off"> Positive
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center col-md-4">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_neutral" autocomplete="off"> Neutral
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center col-md-4">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_negative" autocomplete="off"> Negative
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_love" autocomplete="off"> Love
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4 text-center">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_hatred" autocomplete="off"> Hatred
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4 text-center">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary sentiment">
+        <input type="checkbox" name="options" id="sentiment_anger" autocomplete="off"> Anger
+        </label>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  </div>
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

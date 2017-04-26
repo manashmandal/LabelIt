@@ -1,0 +1,27 @@
+label.btn-primary:hover {
+    background-color: red;
+}
+
+
+/* */
+
+label.btn.btn-primary.sentiment {
+    min-width: 120px;
+}
+
+
+/* On option click */
+
+label.btn.btn-primary.sentiment.active {
+    background: green;
+    font-weight: bold;
+    color: white;
+}
+
+button#next_btn {
+    min-width: 100px;
+}
+
+button#prev_btn {
+    min-width: 100px;
+}
