@@ -1,39 +1,69 @@
 var Sentence = require('./models/sentence');
+var bodyParser = require('body-parser');
+
+var urlencodedParser = bodyParser.urlencoded({
+    extended: false
+});
 
 var count;
 
 module.exports = function (app) {
-    // get all sentence
-    app.get('/api/sentences', function (req, res) {
-
+    // get a sentence
+    app.get('/api/sentences/:sentence_id', function (req, res) {
+        id = +req.params.sentence_id;
+        var sentence = Sentence.findOne({
+            id: id
+        }, function (err, s) {
+            if (err) throw err;
+            console.log(s);
+            res.json(s);
+        });
     });
 
-    app.post('/api/sentences', function (req, res) {
+    // Sends sentence count 
+    app.get('/api/count', function (req, res) {
+        Sentence.count({}, function (e, c) {
+            res.json({
+                "count": c
+            });
+        });
+    });
 
+    // Sends a response if a sentence has appeard before or not 
+    app.get('/api/appeard/:id', function (req, res) {
+        Sentence.findOne({
+            id: +req.params.id
+        }, function (err, s) {
+            if (err) throw err;
+            res.json(s['has_appeard']);
+        });
+    });
+
+    // Sends a post request
+    app.post('/api/sentences', urlencodedParser, function (req, res) {
+
+        console.log("POST REQUEST: " + req.body.id);
+
+        Sentence.findOneAndUpdate({
+            id: req.body.id
+        }, {
+            $set: {
+                text: req.body.text
+            }
+        }, function (err, doc) {
+            console.log(doc);
+            res.json(doc);
+        })
     });
 
     // Application 
     app.get('*', function (req, res) {
         res.sendfile('./public/index.html');
+
+        // loads number of sentences
         Sentence.count({}, function (e, c) {
             console.log("COUNT: " + c);
             count = c;
         })
-
-        var s = new Sentence({
-            id: 1,
-            text: "Bal",
-            is_positive: true,
-            is_negative: true,
-            is_love: true,
-            is_hatred: true,
-            is_neutral: true,
-            has_appeard: true,
-            has_tagged: true
-        }).save(function (err, d) {
-            if (!err) {
-                console.log("DATA SAVED");
-            }
-        });
     });
 }
