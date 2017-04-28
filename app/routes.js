@@ -39,6 +39,17 @@ module.exports = function (app) {
         });
     });
 
+    // Get tagged count 
+    app.get('/api/tagged/count', function (req, res) {
+        Sentence.count({
+            has_tagged: true
+        }, function (e, c) {
+            res.json({
+                "tagged_count": c
+            });
+        });
+    });
+
     // Sends a post request
     app.post('/api/sentences', urlencodedParser, function (req, res) {
 

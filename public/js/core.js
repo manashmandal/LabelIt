@@ -29,14 +29,8 @@ $(document).ready(function () {
         }
     }
 
-    var sentiment_dictionary = {
-        "#sentiment_positive": "is_positive",
-        "#sentiment_negative": "is_negative",
-        "#sentiment_anger": "is_anger",
-        "#sentiment_love": "is_love",
-        "#sentiment_hatred": "is_hatred",
-        "#sentiment_neutral": "is_neutral"
-    }
+    // The div is shown on successful tag 
+    var alert_div = "<div class='alert alert-success text-center offset-md-3' role='alert' id='tag_successful' style='max-width: 50%;'><strong>Tagged successfully</strong></div>";
 
     var sentiment_ids = [
         "#sentiment_positive",
@@ -70,8 +64,6 @@ $(document).ready(function () {
             url: "/api/sentences/" + id,
             success: function (response) {
                 tagged = response['has_tagged'];
-                console.log("GETTING SENTENCE: ");
-                console.log(tagged);
                 $("#tag_sentence").text(response['text']);
                 $("#loaded_id").text(id);
             }
@@ -141,22 +133,33 @@ $(document).ready(function () {
         url: '/api/count',
         success: function (res) {
             sentence_count = +res['count'];
-            console.log("SENTENCE COUNT : " + res['count']);
+            $("#total_count").text(sentence_count);
         },
         dataType: 'json'
+    }).then(function () {
+        // Update tag count
+        $.ajax({
+            type: "GET",
+            url: "/api/tagged/count",
+            success: function (response) {
+                $("#tagged_count").text(response['tagged_count']);
+            }
+        });
     });
 
 
     // Initially set the first one 
-    $.ajax({
-        type: "GET",
-        url: "/api/sentences/1",
-        success: function (sentence) {
-            $("#tag_sentence").text(sentence['text']);
-            $("#loaded_id").text("1");
-            $("#total_count").text("" + sentence_count);
-        }
-    });
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/api/sentences/1",
+    //     success: function (sentence) {
+    //         $("#tag_sentence").text(sentence['text']);
+    //         $("#loaded_id").text("1");
+    //         $("#total_count").text("" + sentence_count);
+    //     }
+    // });
+    // Initially load the first one 
+    get_sentence(1);
 
     // Select all of the content on click the load input text 
     $("#load_sentence_id").on('click', function () {
@@ -179,7 +182,6 @@ $(document).ready(function () {
             }
         }).then(function () {
             if (!has_tagged && is_checked_atleast_one()) {
-                console.log("TAG IT");
 
                 // Get button states
                 var sentiment_data = new SentimentData(cursor);
@@ -187,21 +189,29 @@ $(document).ready(function () {
                 sentiment_data.has_tagged = true;
                 set_data_from_checkbox(sentiment_data);
 
-                console.log(sentiment_data.get_data());
-
                 $.ajax({
                     type: "POST",
                     url: "/api/sentences",
                     data: sentiment_data.get_data(),
                     success: function (response) {
-                        console.log("Data written successfully");
-                        console.log(response);
-
                         // Add a indicator 
+                        $("#tag_alert").append(alert_div);
+                        setTimeout(function () {
+                            $("#tag_successful").remove();
+                        }, 1000);
+
+                        // Update tag count
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/tagged/count",
+                            success: function (response) {
+                                $("#tagged_count").text(response['tagged_count']);
+                            }
+                        });
                     }
                 })
             } else {
-                console.log("NO NEED TO TAG IT");
+                // Add other functionalities when not tagged
             }
         }).then(function () {
 
@@ -219,6 +229,7 @@ $(document).ready(function () {
 
     });
 
+    // Add same functionalities as next button 
     $("#prev_btn").on('click', function () {
         decrease_cursor();
         get_sentence(cursor);
@@ -238,6 +249,19 @@ $(document).ready(function () {
             get_sentence(s_id);
             cursor = s_id;
         }
+    });
+
+    // Show corresponding modals
+    $("#nav_about").click(function () {
+        $("#about_modal").modal('show');
+    });
+
+    $("#nav_howto").click(function () {
+        $("#howto_modal").modal('show');
+    });
+
+    $("#nav_contact").click(function () {
+        $("#contact_modal").modal('show');
     });
 
 });

@@ -29,13 +29,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#" id="nav_about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">How To</a>
+              <a class="nav-link" href="#" id="nav_howto">How To</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#" id="nav_contact">Contact</a>
             </li>
           </ul>
         </div>
@@ -75,6 +75,10 @@
           <button type="button" id="next_btn" class="btn btn-secondary">Next</button>
         </div>
       </div>
+      <div id="tag_alert"></div>
+      <!--<div class="alert alert-success text-center offset-md-3" role="alert" id="tag_successful" style="max-width: 50%; visibility: hidden;">
+        <strong>Tagged successfully</strong>
+      </div>-->
     </div>
 
     <div class="row">
@@ -132,22 +136,99 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-4">
-          <p>Tagged <span class="badge badge-success" id="tagged_count">None</span>
-          </p>
+          <h4>Tagged <span class="badge badge-success" id="tagged_count">None</span>
+          </h4>
         </div>
         <div class="col-md-4">
-          <p>Currently loaded <span class="badge badge-warning" id="loaded_id">1</span>
-          </p>
+          <h4>Currently loaded <span class="badge badge-warning" id="loaded_id">1</span>
+          </h4>
         </div>
 
         <div class="col-md-4">
-          <p>Total <span class="badge badge-info" id="total_count">New</span>
-          </p>
+          <h4>Total <span class="badge badge-info" id="total_count">New</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <!--About Modal-->
+    <div class="modal fade" id="about_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">About</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body text-center">
+            <h5>
+              Web App for Bangla Sentence Labeling
+            </h5>
+
+            <p>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
 
 
+    <!--Howto Modal-->
+    <div class="modal fade" id="howto_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">How To</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body text-center">
+            <h5>
+              Instructions
+            </h5>
+
+            <p>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Contact Modal-->
+    <div class="modal fade" id="contact_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Contact</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body text-center">
+            <h5>
+              Instructions
+            </h5>
+
+            <p>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
