@@ -14,100 +14,105 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="margin-bottom: 20px;">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+  <div class="container">
+
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="margin-bottom: 20px;" id="navigation_bar">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-    <div class="container">
-      <a class="navbar-brand" href="#">Tag It</a>
+      <div class="container">
+        <a class="navbar-brand" href="#">Tag It</a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">How To</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-  </nav>
-
-  <div class="container">
-    <div class="jumbotron">
-      <h4 id="tag_sentence" class="text-center">সেন্টেন্স ট্যাগার</h1>
-        <div class="alert alert-success text-center" id="tag_indicator" role="alert" style="max-width: 100px; float:right;">
-          Tagged
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">How To</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
         </div>
+    </nav>
+
     </div>
-  </div>
 
-
-  <div class="container">
-    <div class="row offset-md-5  text-center" style="margin-bottom: 50px;">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" id="prev_btn" class="btn btn-secondary">Previous</button>
-        <button type="button" id="next_btn" class="btn btn-secondary">Next</button>
+    <div class="container">
+      <div class="jumbotron">
+        <h4 id="tag_sentence" class="text-center">সেন্টেন্স ট্যাগার</h1>
+          <div class="alert alert-success text-center" id="tag_indicator" role="alert" style="max-width: 100px; float:right;">
+            Tagged
+          </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-3 text-center col-md-4">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_positive">
+
+    <div class="container">
+      <div class="row offset-md-5  text-center" style="margin-bottom: 50px;">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" id="prev_btn" class="btn btn-secondary">Previous</button>
+          <button type="button" id="next_btn" class="btn btn-secondary">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 text-center col-md-4">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_positive">
         <input type="checkbox" name="options" id="sentiment_positive" autocomplete="off"> Positive
         </label>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-3 text-center col-md-4">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_neutral">
+      <div class="col-md-3 text-center col-md-4">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_neutral">
         <input type="checkbox" name="options" id="sentiment_neutral" autocomplete="off"> Neutral
         </label>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-3 text-center col-md-4">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_negative">
+      <div class="col-md-3 text-center col-md-4">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_negative">
         <input type="checkbox" name="options" id="sentiment_negative" autocomplete="off"> Negative
         </label>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_love">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_love">
         <input type="checkbox" name="options" id="sentiment_love" autocomplete="off"> Love
         </label>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-4 text-center">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_hatred">
+      <div class="col-md-4 text-center">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_hatred">
         <input type="checkbox" name="options" id="sentiment_hatred" autocomplete="off"> Hatred
         </label>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-4 text-center">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary sentiment" id="label_sentiment_anger">
+      <div class="col-md-4 text-center">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary sentiment" id="label_sentiment_anger">
         <input type="checkbox" name="options" id="sentiment_anger" autocomplete="off"> Anger
         </label>
+        </div>
       </div>
     </div>
-  </div>
 
   </div>
   </div>

@@ -25,3 +25,12 @@ button#next_btn {
 button#prev_btn {
     min-width: 100px;
 }
+
+nav#navigation_bar {
+    margin-top: 20px;
+}
+
+body {
+    max-width: 98%;
+    min-width: 98%;
+}
