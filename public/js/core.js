@@ -1,4 +1,43 @@
 $(document).ready(function () {
+
+    // Class for sentiment data 
+    class SentimentData {
+        constructor(id) {
+            this.id = id;
+            this.is_positive = false;
+            this.is_negative = false;
+            this.is_love = false;
+            this.is_anger = false;
+            this.is_hatred = false;
+            this.is_neutral = false;
+            this.has_appeard = false;
+            this.has_tagged = false;
+        }
+
+        get_data() {
+            return {
+                "id": this.id,
+                "is_positive": this.is_positive,
+                "is_negative": this.is_negative,
+                "is_neutral": this.is_neutral,
+                "is_love": this.is_love,
+                "is_hatred": this.is_hatred,
+                "is_anger": this.is_anger,
+                "has_appeard": this.has_appeard,
+                "has_tagged": this.has_tagged
+            }
+        }
+    }
+
+    var sentiment_dictionary = {
+        "#sentiment_positive": "is_positive",
+        "#sentiment_negative": "is_negative",
+        "#sentiment_anger": "is_anger",
+        "#sentiment_love": "is_love",
+        "#sentiment_hatred": "is_hatred",
+        "#sentiment_neutral": "is_neutral"
+    }
+
     var sentiment_ids = [
         "#sentiment_positive",
         "#sentiment_negative",
@@ -31,15 +70,15 @@ $(document).ready(function () {
             url: "/api/sentences/" + id,
             success: function (response) {
                 tagged = response['has_tagged'];
+                console.log("GETTING SENTENCE: ");
+                console.log(tagged);
                 $("#tag_sentence").text(response['text']);
                 $("#loaded_id").text(id);
             }
         }).then(function () {
             if (tagged === false) {
-                console.log("NOT TAGGED");
                 $("#tag_indicator").hide();
             } else if (tagged === true) {
-                console.log("TAGGED");
                 $("#tag_indicator").show();
             } else {
                 console.log("NOT TAGGED ERROR");
@@ -47,19 +86,6 @@ $(document).ready(function () {
         })
     }
 
-    function tag_current_sentence(_id_) {
-        $.ajax({
-            url: "/api/sentences/",
-            type: "POST",
-            data: {
-                id: +_id_,
-                text: "ChAGOL"
-            },
-            success: function (response) {
-                console.log(response);
-            }
-        });
-    }
 
     // Check if at least one sentiment is checked 
     function is_checked_atleast_one() {
@@ -85,10 +111,28 @@ $(document).ready(function () {
         });
     }
 
-    // Post data
-    function post_data() {
-
+    // Helping function for increasing and decreasing iterator [cyclic rotation]
+    function increase_cursor() {
+        cursor += 1;
+        if (cursor > sentence_count) cursor = 1;
     }
+
+    function decrease_cursor() {
+        cursor -= 1;
+        if (cursor < 1) cursor = sentence_count;
+    }
+
+    /// Gets data from checkbox and save it to the sentiment_data object 
+    function set_data_from_checkbox(sentiment_data) {
+        sentiment_data.is_love = $("#sentiment_love").prop("checked");
+        sentiment_data.is_hatred = $("#sentiment_hatred").prop("checked");
+        sentiment_data.is_neutral = $("#sentiment_neutral").prop("checked");
+        sentiment_data.is_positive = $("#sentiment_positive").prop("checked");
+        sentiment_data.is_negative = $("#sentiment_negative").prop("checked");
+        sentiment_data.is_anger = $("#sentiment_anger").prop("checked");
+    }
+
+
 
 
     // Get sentence count 
@@ -114,34 +158,70 @@ $(document).ready(function () {
         }
     });
 
+    // Select all of the content on click the load input text 
+    $("#load_sentence_id").on('click', function () {
+        $(this).select();
+    });
+
     // On next button click do the followings
     // 1. Get a sentence from database at random 
     // 2. Reset the previous selected values from checkbox
     // 3. Save the current checkboxes values 
     $("#next_btn").on('click', function () {
 
-        console.log("HAS CHECKED AT LEAST ONE : " + is_checked_atleast_one());
+        var has_tagged = false;
 
-        tag_current_sentence(cursor);
+        $.ajax({
+            type: "GET",
+            url: "/api/sentences/" + cursor,
+            success: function (response) {
+                has_tagged = response['has_tagged'];
+            }
+        }).then(function () {
+            if (!has_tagged && is_checked_atleast_one()) {
+                console.log("TAG IT");
 
-        cursor += 1;
+                // Get button states
+                var sentiment_data = new SentimentData(cursor);
+                sentiment_data.has_appeard = true;
+                sentiment_data.has_tagged = true;
+                set_data_from_checkbox(sentiment_data);
 
-        if (cursor > sentence_count) cursor = sentence_count;
+                console.log(sentiment_data.get_data());
 
-        get_sentence(cursor);
+                $.ajax({
+                    type: "POST",
+                    url: "/api/sentences",
+                    data: sentiment_data.get_data(),
+                    success: function (response) {
+                        console.log("Data written successfully");
+                        console.log(response);
 
-        reset_options();
+                        // Add a indicator 
+                    }
+                })
+            } else {
+                console.log("NO NEED TO TAG IT");
+            }
+        }).then(function () {
+
+            reset_options();
+            increase_cursor();
+
+            $.ajax({
+                type: "GET",
+                url: "/api/sentences/" + cursor,
+                success: function (response) {
+                    get_sentence(cursor);
+                }
+            });
+        });
 
     });
 
     $("#prev_btn").on('click', function () {
-        cursor -= 1;
-
-        if (cursor < 1) cursor = 1;
-
+        decrease_cursor();
         get_sentence(cursor);
-
-        console.log("Prev");
     });
 
     // Get selected items 
@@ -156,6 +236,7 @@ $(document).ready(function () {
             alert("Out of bound error, enter a number within the range");
         } else {
             get_sentence(s_id);
+            cursor = s_id;
         }
     });
 

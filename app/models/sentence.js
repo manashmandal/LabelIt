@@ -8,6 +8,7 @@ module.exports = mongoose.model('Sentence', {
     is_love: Boolean,
     is_hatred: Boolean,
     is_neutral: Boolean,
+    is_anger: Boolean,
     has_appeard: Boolean,
     has_tagged: Boolean
 });

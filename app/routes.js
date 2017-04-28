@@ -48,7 +48,13 @@ module.exports = function (app) {
             id: req.body.id
         }, {
             $set: {
-                text: req.body.text
+                is_positive: req.body.is_positive,
+                is_negative: req.body.is_negative,
+                is_love: req.body.is_love,
+                is_hatred: req.body.is_hatred,
+                is_neutral: req.body.is_neutral,
+                has_appeard: req.body.has_appeard,
+                has_tagged: req.body.has_tagged
             }
         }, function (err, doc) {
             console.log(doc);
