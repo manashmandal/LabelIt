@@ -52,6 +52,21 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="row" style="margin-bottom: 30px;">
+        <form class="form-inline offset-md-4" id="load_sentence_form">
+
+          <label class="sr-only" for="load_sentence_id">Number</label>
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">Number</div>
+            <input type="text" class="form-control" id="load_sentence_id" placeholder="Enter a number e.g: 1">
+          </div>
+
+          <button type="button" class="btn btn-primary" id="load_sentence_btn">Load</button>
+        </form>
+      </div>
+    </div>
+
 
     <div class="container">
       <div class="row offset-md-5  text-center" style="margin-bottom: 50px;">
@@ -88,7 +103,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 30px;">
       <div class="col-md-4 text-center">
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary sentiment" id="label_sentiment_love">
@@ -114,16 +129,33 @@
       </div>
     </div>
 
-  </div>
-  </div>
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <p>Tagged <span class="badge badge-success" id="tagged_count">None</span>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <p>Currently loaded <span class="badge badge-warning" id="loaded_id">1</span>
+          </p>
+        </div>
 
-  <!-- jQuery first, then Tether, then Bootstrap JS. -->
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-    crossorigin="anonymous"></script>
-  <script src="js/core.js"></script>
+        <div class="col-md-4">
+          <p>Total <span class="badge badge-info" id="total_count">New</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+      crossorigin="anonymous"></script>
+    <script src="js/core.js"></script>
 </body>
 
 </html>

@@ -14,6 +14,7 @@ $(document).ready(function () {
                 console.log("SUCCESS");
                 tagged = response['has_tagged'];
                 $("#tag_sentence").text(response['text']);
+                $("#loaded_id").text(id);
             }
         }).then(function () {
             if (tagged === false) {
@@ -66,6 +67,7 @@ $(document).ready(function () {
         url: "/api/sentences/1",
         success: function (sentence) {
             $("#tag_sentence").text(sentence['text']);
+            $("#loaded_id").text("1");
         }
     });
 
@@ -134,6 +136,18 @@ $(document).ready(function () {
         console.log($("#sentiment_positive:checked").length);
     })
 
+    // Load sentence on request
+    $("#load_sentence_btn").on('click', function () {
+        console.log("SUBMITTED");
+        var s_id = +$("#load_sentence_id").val();
+        console.log(s_id);
+
+        if (s_id > sentence_count) {
+            alert("Out of bound error, enter a number within the range");
+        } else {
+            get_sentence(s_id);
+        }
+    });
 
     // Debugging 
     sentiment_ids.forEach(function (sentiment_id) {
