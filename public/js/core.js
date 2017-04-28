@@ -1,4 +1,23 @@
 $(document).ready(function () {
+    var sentiment_ids = [
+        "#sentiment_positive",
+        "#sentiment_negative",
+        "#sentiment_anger",
+        "#sentiment_love",
+        "#sentiment_hatred",
+        "#sentiment_neutral"
+    ];
+
+    var label_sentiment_ids = [
+        "#label_sentiment_positive",
+        "#label_sentiment_negative",
+        "#label_sentiment_anger",
+        "#label_sentiment_love",
+        "#label_sentiment_hatred",
+        "#label_sentiment_neutral"
+    ];
+
+    // Hiding the tag indicator at first 
     $("#tag_indicator").hide();
 
     var cursor = 1;
@@ -11,7 +30,6 @@ $(document).ready(function () {
             type: "GET",
             url: "/api/sentences/" + id,
             success: function (response) {
-                console.log("SUCCESS");
                 tagged = response['has_tagged'];
                 $("#tag_sentence").text(response['text']);
                 $("#loaded_id").text(id);
@@ -35,7 +53,7 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 id: +_id_,
-                text: "BALCHAL"
+                text: "ChAGOL"
             },
             success: function (response) {
                 console.log(response);
@@ -43,33 +61,35 @@ $(document).ready(function () {
         });
     }
 
-    sentiment_ids = [
-        "#sentiment_positive",
-        "#sentiment_negative",
-        "#sentiment_anger",
-        "#sentiment_love",
-        "#sentiment_hatred",
-        "#sentiment_neutral"
-    ];
-
-    label_sentiment_ids = [
-        "#label_sentiment_positive",
-        "#label_sentiment_negative",
-        "#label_sentiment_anger",
-        "#label_sentiment_love",
-        "#label_sentiment_hatred",
-        "#label_sentiment_neutral"
-    ];
-
-    // Initially set the first one 
-    $.ajax({
-        type: "GET",
-        url: "/api/sentences/1",
-        success: function (sentence) {
-            $("#tag_sentence").text(sentence['text']);
-            $("#loaded_id").text("1");
+    // Check if at least one sentiment is checked 
+    function is_checked_atleast_one() {
+        var has_checked = false;
+        for (var i = 0; i < sentiment_ids.length; i++) {
+            has_checked = $(sentiment_ids[i]).prop("checked");
+            if (has_checked) return true;
         }
-    });
+        return false;
+    }
+
+    // Reset the form
+    function reset_options() {
+        // Uncheck all of the checked buttons 
+        label_sentiment_ids.forEach(function (lsi) {
+            $(lsi).attr("class", "btn btn-primary sentiment")
+                .attr("aria-pressed", false);
+        });
+
+        sentiment_ids.forEach(function (si) {
+            $(si).attr("aria-pressed", false);
+            $(si).prop("checked", false);
+        });
+    }
+
+    // Post data
+    function post_data() {
+
+    }
+
 
     // Get sentence count 
     $.ajax({
@@ -83,31 +103,24 @@ $(document).ready(function () {
     });
 
 
+    // Initially set the first one 
+    $.ajax({
+        type: "GET",
+        url: "/api/sentences/1",
+        success: function (sentence) {
+            $("#tag_sentence").text(sentence['text']);
+            $("#loaded_id").text("1");
+            $("#total_count").text("" + sentence_count);
+        }
+    });
+
     // On next button click do the followings
     // 1. Get a sentence from database at random 
     // 2. Reset the previous selected values from checkbox
     // 3. Save the current checkboxes values 
     $("#next_btn").on('click', function () {
 
-
-        console.log("NExt");
-
-        // Uncheck all of the checked buttons 
-        label_sentiment_ids.forEach(function (lsi) {
-            $(lsi).attr("class", "btn btn-primary sentiment")
-                .attr("aria-pressed", false);
-        })
-
-        sentiment_ids.forEach(function (si) {
-            $(si).attr("aria-pressed", false);
-            $(si).prop("checked", false);
-        })
-
-        sentiment_ids.forEach(function (sentiment_id) {
-            console.log(sentiment_id + " prop: " + $(sentiment_id).prop('checked'));
-            // console.log(sentiment_id + " changed: " + $(sentiment_id + ":checked").length);
-        });
-
+        console.log("HAS CHECKED AT LEAST ONE : " + is_checked_atleast_one());
 
         tag_current_sentence(cursor);
 
@@ -117,7 +130,7 @@ $(document).ready(function () {
 
         get_sentence(cursor);
 
-
+        reset_options();
 
     });
 
@@ -138,10 +151,7 @@ $(document).ready(function () {
 
     // Load sentence on request
     $("#load_sentence_btn").on('click', function () {
-        console.log("SUBMITTED");
         var s_id = +$("#load_sentence_id").val();
-        console.log(s_id);
-
         if (s_id > sentence_count) {
             alert("Out of bound error, enter a number within the range");
         } else {
@@ -149,10 +159,4 @@ $(document).ready(function () {
         }
     });
 
-    // Debugging 
-    sentiment_ids.forEach(function (sentiment_id) {
-        $(sentiment_id).change(function () {
-            console.log(sentiment_id + " prop: " + $(sentiment_id).prop('checked'));
-        });
-    });
-})
+});
