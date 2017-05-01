@@ -1,5 +1,9 @@
-var Sentence = require('./models/sentence');
+//var Sentence = require('./models/sentence');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var db = mongoose.connection;
+var Sentence = db.collection('label_it');
+
 
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
