@@ -16,7 +16,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection Error'));
 db.once('open', function(){
     var collection = db.collection('label_it');
-    collection.find({id:1}, function(err, result){
+    collection.findOne({id:1}, function(err, result){
         console.log(result);
     });
 });
