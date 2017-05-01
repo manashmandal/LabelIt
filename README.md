@@ -1,2 +1,2 @@
 # LabelIt
-Label It Laravel Website Codebase
+Label It Website Codebase
