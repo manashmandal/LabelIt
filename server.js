@@ -11,6 +11,16 @@ var morgan = require('morgan');
 // Connect to database
 mongoose.connect(database.url);
 
+// Checking connection
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection Error'));
+db.once('open', function(){
+    var collection = db.collection('label_it');
+    collection.find({id:1}, function(err, result){
+        console.log(result);
+    });
+});
+
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.urlencoded({
