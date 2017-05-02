@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
-
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
@@ -18,7 +17,6 @@ module.exports = function (app) {
             id: id
         }, function (err, s) {
             if (err) throw err;
-            console.log(s);
             res.json(s);
         });
     });
@@ -26,6 +24,7 @@ module.exports = function (app) {
     // Sends sentence count 
     app.get('/api/count', function (req, res) {
         Sentence.count({}, function (e, c) {
+            if (e) throw e;
             res.json({
                 "count": c
             });
@@ -56,8 +55,6 @@ module.exports = function (app) {
     // Sends a post request
     app.post('/api/sentences', urlencodedParser, function (req, res) {
 
-        console.log("POST REQUEST: " + req.body.id);
-
         Sentence.findOneAndUpdate({
             id: req.body.id
         }, {
@@ -71,7 +68,7 @@ module.exports = function (app) {
                 has_tagged: req.body.has_tagged
             }
         }, function (err, doc) {
-            console.log(doc);
+            if (err) throw err;
             res.json(doc);
         })
     });
@@ -79,10 +76,9 @@ module.exports = function (app) {
     // Application 
     app.get('*', function (req, res) {
         res.sendfile('./public/index.html');
-
         // loads number of sentences
         Sentence.count({}, function (e, c) {
-            console.log("COUNT: " + c);
+            if (e) throw e;
             count = c;
         })
     });
