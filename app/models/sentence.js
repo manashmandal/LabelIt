@@ -11,4 +11,4 @@ module.exports = mongoose.model('Sentence', {
     is_anger: Boolean,
     has_appeard: Boolean,
     has_tagged: Boolean
-});
+}, 'label_it');
