@@ -165,14 +165,55 @@
         </button>
           </div>
           <div class="modal-body text-center">
-            <h5>
+            <h4>
               Web App for Bangla Sentence Labeling
-            </h5>
+            </h4>
+          </div>
+
+          <div class="container">
+            <p>
+              When it comes to Bangla language, labeled dataset is hard to find. To keep that in mind, we have decided to make our own
+              labeled dataset. This initiative has been taken to label paragraphs to make a robust sentiment analyzer for
+              Bangla language.
+
+
+              <b>Sentences displayed here have been scraped from <a href="http://www.sachalayatan.com/">Sachalayatan Blog</a>.</b>
+            </p>
 
             <p>
-
+              You can also be a part of this massive data labeling madness.
             </p>
+
+            <h4>Who we are</h4>
+            <h5><a href="http://mandal.manash.me">1. Manash Kumar Mandal</a></h5>
+            <p>
+              This *nonsense* idea was actually generated from me, I wrote the web application and the script which was used to collect
+              the corpus.
+            </p>
+
+            <h5>2. Kanak Mazumder</h5>
+            <p>
+              He is writing the codes for formatting collected data, database inflation, language modeling and sentiment analyzer for his
+              thesis work.
+            </p>
+
+
+            <h5>What we have done so far</h5>
+            <p>We haven't got the chance to do much but here are some key things we have achieved in past few weeks.</p>
+
+            <ul>
+              <li>Prepared <b>300 dimensional</b> Word Vectors for about <b>5M tokens</b>. Which is larger than any Bangla word
+                vectors available on the internet.</li>
+              <li>Prepared RNN-LSTM based Language Model using Wikipedia, SomewhereinBlog and Sachalaytan corpus.</li>
+              <li>On the way of making Named Entity Recognizer (NER) tagger for Bangla Language</li>
+            </ul>
+
+            <p><b>Since this is currently a thesis work, this app isn't equipped with fancy features. Will update in near future, but for now you have to play along.</b></p>
+
+            <p>Check out How To section for more instructions</p>
+
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
@@ -191,15 +232,26 @@
           <span aria-hidden="true">&times;</span>
         </button>
           </div>
-          <div class="modal-body text-center">
+          <div class="modal-body">
             <h5>
               Instructions
             </h5>
 
-            <p>
+            <ol>
+              <li>Select appropriate sentiments by clicking the buttons.</li>
+              <li>Then press <b>Next</b> to save it. <b>Remember, each sentence can only be tagged once!</b></li>
+              <li>If you want to load a particular sentence, write any number starting from zero upto total number of sentences
+                and click the Load button</li>
+              <li><b>If you don't select any options and click next, you'll just browse the next sentence without tagging the previous one.</b></li>
+              <li>Clicking on Previous button <b>will not save any data.</b></li>
+            </ol>
 
-            </p>
+            <h5>
+              Please don't tag any sentence just for testing purpose. There is no dignity in ruining others' work.
+            </h5>
+
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
@@ -219,12 +271,18 @@
           </div>
           <div class="modal-body text-center">
             <h5>
-              Instructions
+              Want to collaborate? or Have any questions?
             </h5>
 
             <p>
-
+              Shoot a mail here `manashmndl[at]gmail[dot]com`. I'll be happy to answer any questions or resolve any problems you might
+              face.
             </p>
+
+            <p>
+              Thank you!
+            </p>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
