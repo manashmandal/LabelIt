@@ -50,6 +50,40 @@ $(document).ready(function () {
         "#label_sentiment_neutral"
     ];
 
+    // Tag-badge dictionary 
+    var tag_badge_dict = {
+        "is_neutral": "badge-default",
+        "is_hatred": "badge-warning",
+        "is_positive": "badge-success",
+        "is_negative": "badge-danger",
+        "is_love": "badge-info",
+        "is_anger": "badge-primary"
+    };
+
+    // Tag Text Dictionary
+    var tag_text_dict = {
+        "is_neutral": "Neutral",
+        "is_hatred": "Hatred",
+        "is_positive": "Positive",
+        "is_negative": "Negative",
+        "is_anger": "Anger",
+        "is_love": "Love"
+    };
+
+    // Shows the tags on the page
+    function show_tags(response) {
+        var tagged = [];
+        for (var key in response) {
+            if (response[key] === true && key !== "has_appeard" && key != "has_tagged") {
+                tagged.push(key);
+            }
+        }
+        // Now showing the tags
+        tagged.forEach(function (value) {
+            $("#tag_status").append("<span style='margin-left: 2px;' class='badge badge-pill badge-primary " + tag_badge_dict[value] + "'>" + tag_text_dict[value] + "</span>");
+        });
+    }
+
     // Hiding the tag indicator at first 
     $("#tag_indicator").hide();
 
@@ -59,6 +93,7 @@ $(document).ready(function () {
     // Check if a sentence has been tagged or not, if tagged it will not accept further tag
     function get_sentence(id) {
         var tagged = null;
+        var res;
         $.ajax({
             type: "GET",
             url: "/api/sentences/" + id,
@@ -66,17 +101,24 @@ $(document).ready(function () {
                 tagged = response['has_tagged'];
                 $("#tag_sentence").text(response['text']);
                 $("#loaded_id").text(id);
+                res = response;
             }
         }).then(function () {
+            // Remove existing displayed tags
+            $("#tag_status > span").remove();
+
             if (tagged === false) {
                 $("#tag_indicator").hide();
             } else if (tagged === true) {
                 $("#tag_indicator").show();
+                show_tags(res);
             } else {
                 console.log("NOT TAGGED ERROR");
             }
         })
     }
+
+
 
 
     // Check if at least one sentiment is checked 
@@ -198,17 +240,17 @@ $(document).ready(function () {
                         $("#tag_alert").append(alert_div);
                         setTimeout(function () {
                             $("#tag_successful").remove();
-                        }, 1000);
-
-                        // Update tag count
-                        $.ajax({
-                            type: "GET",
-                            url: "/api/tagged/count",
-                            success: function (response) {
-                                $("#tagged_count").text(response['tagged_count']);
-                            }
-                        });
+                        }, 500);
                     }
+                }).then(function () {
+                    // Update tag count
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/tagged/count",
+                        success: function (response) {
+                            $("#tagged_count").text(response['tagged_count']);
+                        }
+                    });
                 })
             } else {
                 // Add other functionalities when not tagged
